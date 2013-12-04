@@ -1,4 +1,5 @@
-validate
+Form Validation - Bootstrap, jQuery, Ajax & PHP
 ========
 
-Form Validation for Bootstrap/jQuery/Ajax/PHP
+See Examples at:
+http://cthiggo.github.io/validate
