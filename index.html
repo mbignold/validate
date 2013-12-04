@@ -1,0 +1,303 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Form Validation for Bootstrap using Ajax, jQuery and PHP</title>
+    <link rel="stylesheet" type="text/css" href="bootstrap/bootstrap.min.css"></link>
+    <link rel="stylesheet" type="text/css" href="chosen-optional/chosen.bootstrap.min.css" />   
+</head>
+
+<body>
+<div class='container'>
+    <div class="row">
+        <div class='col-lg-12'>
+            <h2 class='page-header'>
+                Validate <small>Simple & robust form validation for Bootstrap 3.0, jQuery, Ajax & PHP</small>
+            </h2>
+            <ul>
+                <li>MIT Licence</li>
+                <li>Copyright 2013 Michael Bignold</li>
+                <li><a href='https://github.com/cthiggo/validate'>https://github.com/cthiggo/validate</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="row">
+        <div class='col-lg-12'>
+                <h3 class='page-header'>
+                    Specifications
+                </h3>
+        </div>
+    </div>
+    <div class="row">
+        <div class='col-lg-6'>
+            <h5>Features</h5>
+            <ul>
+                <li>Uses Ajax to validate input.</li>
+                <li>Can be easily modified to check a database for on the fly app-specific validation.</li>
+                <li>Basic setup using only <code>[data-]</code> properties in HTML tags.</li>
+                <li>Uses Bootstrap Tooltips for a streamlined & functional user interface.</li>
+                <li>Only one single <code>.js</code> file to add to your page, and <code>.php</code> file to add to your server.</li>
+                <li>Works with <a href='https://github.com/alxlit/bootstrap-chosen'>bootstrap-chosen</a> improved select boxes.</li>
+            </ul>
+        </div>
+        <div class='col-lg-6'>
+            <h5>Dependencies</h5>
+            <ul>
+                <li>Requires jQuery 2.0.2+</li>
+                <li>Requires Bootstrap Tooltips (Bootstrap 2 or 3)</li>
+            </ul>
+        </div>
+    </div>
+    <div class="row">
+        <div class='col-lg-12'>
+            <h3 class='page-header'>Examples</h3>
+        </div>
+    </div>
+    <div class="row">
+        <div class='col-lg-12'>
+            <div class='panel'>
+                <div class='panel-heading'><h4 class='panel-title'>Values required <code>[data-vreq=*]</code></h4></div>
+                <form id='form1'>
+                    <div class='row'>
+                        <div class='col-lg-4'>
+                            <input id='firstname'
+                                   class='form-control input-md' 
+                                   placeholder='First Name'
+                                   data-vreq='1'/>
+                        </div>
+                        <div class='col-lg-8'>
+                            <h5>Type anything in this field. </h5><code>[data-vreq=1]</code>
+                        </div>
+                    </div>
+                    <BR>
+                    <div class='row'>
+                        <div class='col-lg-4'>
+                            <input id='lastname'
+                                   class='form-control input-md' 
+                                   placeholder='Last Name'
+                                   data-vreq='0'/>
+                        </div>
+                        <div class='col-lg-8'>
+                            <h5>No value required here. </h5><code>[data-vreq=0]</code>
+                        </div>
+                    </div>
+                        <BR>
+                     <div class='row'>
+                        <div class='col-lg-4'>
+                            <a 
+                               class='btn btn-md btn-primary'
+                               data-vsubmit='1' 
+                               data-vfunc='doSomething' 
+                               data-vclear='1'>Submit</a>
+                        </div>
+                        <div class='col-lg-8'>
+                            <h5>Make anything a submit button. </h5><code>[data-vsubmit=1]</code>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+    
+    <div class="row">
+        <div class='col-lg-12'>
+            
+            <div class='panel'>
+                <div class='panel-heading'><h4 class='panel-title'>Valid values required <code>[data-vreq=1 data-vtype=*]</code></h4></div>
+                <form>
+                    <div class='row'>
+                        <div class='col-lg-4'>
+                            <input id='firstname'
+                                   class='form-control input-md' 
+                                   placeholder='Phone Number'
+                                   data-vtype='phone_CA'
+                                   data-vreq='1'/>
+                        </div>
+                        <div class='col-lg-8'>
+                            <h5>This input requires a value, and requires of valid type. </h5><code>[data-vreq=1 data-vtype='phone_CA']</code>
+                            <P>Tests for valid Canadian/North American Phone Number, try any of these:
+                                <ul>
+                                    <li>+1(403) 999 9999</li>
+                                    <li>18005555555</li>
+                                    <li>1-403-999-9999</li>
+                                    <li>403-999-9999</li>
+                                    <li>780.999-9999</li>
+                                    <li>and any other way you can think of.</li>
+                                </ul>
+                            </p>
+                        </div>
+                    </div>
+                    <BR>
+                    <div class='row'>
+                        <div class='col-lg-4'>
+                            <input id='lastname'
+                                   class='form-control input-md' 
+                                   placeholder='Last Name'
+                                   data-vreq='1'
+                                   data-vtype='email'/>
+                        </div>
+                        <div class='col-lg-8'>
+                            <h5>Value required, and must be valid email. </h5><code>[data-vreq=1 data-vtype='email']</code>
+                        </div>
+                    </div>
+                        <BR>
+                     <div class='row'>
+                        <div class='col-lg-4'>
+                            <a 
+                               class='btn btn-md btn-primary'
+                               data-vsubmit='1' 
+                               data-vfunc='doSomething' 
+                               data-vclear='1'>Submit</a>
+                        </div>
+                        <div class='col-lg-8'>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+    
+    
+    <div class="row">
+        <div class='col-lg-12'>
+            <div class='panel'>
+                <div class='panel-heading'><h4 class='panel-title'>Optional (but valid) values <code>[data-vreq=0 data-vtype=*]</code></h4></div>
+                <form>
+                    <div class='row'>
+                        <div class='col-lg-4'>
+                            <input id='firstname'
+                                   class='form-control input-md' 
+                                   placeholder='Phone Number (optional)'
+                                   data-vtype='phone_CA'
+                                   data-vreq='0'/>
+                        </div>
+                        <div class='col-lg-8'>
+                            <h5>This input does not require a value, but if entered it must be valid. </h5><code>[data-vreq=1 data-vtype='phone_CA']</code>
+                        </div>
+                    </div>
+                    <BR>
+                    <div class='row'>
+                        <div class='col-lg-4'>
+                            <input id='lastname'
+                                   class='form-control input-md' 
+                                   placeholder='Postal Code (optional)'
+                                   data-vreq='0'
+                                   data-vtype='postal_CA'/>
+                        </div>
+                        <div class='col-lg-8'>
+                            <h5>This input does not require a value, but if entered must be valid. </h5><code>[data-vreq=1 data-vtype='postal_CA']</code>
+                            <P>Tests for valid Canadian Postal Code, try any of these:
+                                <ul>
+                                    <li>t4t4t4</li>
+                                    <li>T1W 4T9</li>
+                                    <li>t4t-4t4</li>
+                                    <li>V1Y.1W3</li>
+                                    <li>and any other way you can think of.</li>
+                                </ul>
+                            </p>
+                        </div>
+                    </div>
+                        <BR>
+                     <div class='row'>
+                        <div class='col-lg-4'>
+                            <a 
+                               class='btn btn-md btn-primary'
+                               data-vsubmit='1' 
+                               data-vfunc='doSomething' 
+                               data-vclear='1'>Submit</a>
+                        </div>
+                        <div class='col-lg-8'>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+    
+    
+    
+    <div class="row">
+        <div class='col-lg-12'>
+            <div class='panel'>
+                <div class='panel-heading'><h4 class='panel-title'>bootstrap-chosen select boxes <code>[data-vreq=*]</code></h4></div>
+                <form>
+                    <div class='row'>
+                        <div class='col-lg-4'>
+                            <select class="chosen chosen-select-deselect"
+                                    id='province'
+                                    data-vreq='1'>
+                                <option value=''></option>
+                                <option value='AB'>Alberta</option>
+                                <option value='BC'>British Columbia</option>
+                                <option value='SK'>Saskatchewan</option>
+                                <option value='MB'>Manitoba</option>
+                                <option value='ON'>Ontario</option>
+                                <option value='QC'>Quebec</option>
+                                <option value='NB'>New Brunswick</option>
+                                <option value='PE'>Prince Edward Island</option>
+                                <option value='NL'>Newfoundland & Labrador</option>
+                                <option value='NS'>Nova Scotia</option>
+                                <option value='YK'>Yukon</option>
+                                <option value='NW'>North-West Territories</option>
+                                <option value='NT'>Nunavut</option>
+                            </select>
+                        </div>
+                        <div class='col-lg-8'>
+                            <h5>This input is required.  Just add the <code>.chosen</code> class to the select box. </h5><code>[data-vreq=1]</code>
+                        </div>
+                    </div>
+                     <BR>
+                     <div class='row'>
+                        <div class='col-lg-4'>
+                            <a 
+                               class='btn btn-md btn-primary'
+                               data-vsubmit='1' 
+                               data-vfunc='doSomething' 
+                               data-vclear='1'>Submit</a>
+                        </div>
+                        <div class='col-lg-8'>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <BR><BR>
+    <div class="row">
+        <div class='col-lg-12'>
+            <h4><a class="fork" href="https://github.com/cthiggo/validate">Fork on Github</a></h4>
+        </div>
+    </div>
+</div>
+<BR><BR><BR><BR>
+
+
+    
+    <script type="text/javascript" src="jquery/jquery.min.js"></script>
+    <script type="text/javascript" src="bootstrap/bootstrap.min.js"></script>
+    <script type="text/javascript" src="validate.js"></script>
+    <script type="text/javascript" src="chosen-optional/chosen.jquery.min.js"></script>
+    <script type='text/javascript'>
+      /* 
+       * Chosen Configuration & Initialization 
+       */
+          var config = {
+            '.chosen-select'           : {},
+            '.chosen-select-deselect'  : {allow_single_deselect:true},
+            '.chosen-select-no-single' : {disable_search_threshold:10},
+            '.chosen-select-no-results': {no_results_text:'Oops, nothing found!'},
+            '.chosen-select-width'     : {width:"95%"}
+          }
+          for (var selector in config) {
+            $(selector).chosen(config[selector]);
+          }
+
+          $(window).load(function(){ //patch fix size of select box
+              $('.chosen-container').css('width', '100%');
+          });
+    </script>
+</body>
+</html>
