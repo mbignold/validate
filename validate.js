@@ -68,7 +68,6 @@ validate = {
             
             
     submit: function(oForm, oBtn){
-        //console.log('submit');
         //prevent form submission
         oForm.submit(function(e) { e.preventDefault(); return false; });
         
@@ -92,14 +91,16 @@ validate = {
     },
     
     form: function(oForm, fnSuccess, fnFailure){
-        //console.log('form');
-        oForm.find(':input').each(function(){
+        var oAllInputs = oForm.find('input, textarea, select').filter('[id]');
+        var oLastInput = oAllInputs.filter(':last');
+        
+        oAllInputs.each(function(){
             if(!$(this).hasClass('vsuccess') && !$(this).hasClass('vwarning') && !$(this).hasClass('vincomplete')){
                 validate.input($(this), function(oInput){
                     validate.form(oForm, fnSuccess, fnFailure);
                 });
                 return false;
-            } else if(oForm.find('input:last').attr('id') == $(this).attr('id')){ //check if input is the last input
+            } else if(oLastInput.get(0) === this){ //check if input is the last input
                 if(validate.isFormSuccess(oForm) === true){ //if every input has success classes
                     fnSuccess(oForm); //submit form
                 } else {
@@ -113,7 +114,6 @@ validate = {
     },
             
     input: function(oInput, fnCallback){
-        //console.log('input');
         if(!empty(oInput.val())){
             if(!empty(oInput.attr('data-vtype'))){
                 validate.ajax(oInput.val(), oInput.attr('data-vtype'), 
@@ -146,20 +146,23 @@ validate = {
     },
             
     ajax: function(sValue, sType, fnSuccess, fnFailure){
-        //console.log('ajax');
         $.post(validate.sAjaxPath, {vtype: sType, vvalue: sValue})
          .done(function(sResponse) {
             if (sResponse != '1') {
                 fnFailure(sResponse);
+                return false;
             } else {
                 fnSuccess(sResponse);
+                return false;
             }
-        });
-        return false;
+         })
+         .fail(function(sError){
+            fnFailure('Ajax error.');
+            return false;
+         });
     },
             
     setStatus: function(oInput, sStatus, sMessage){
-        //console.log('setstatus');
         if (oInput.is('select') && oInput.hasClass('chosen')) {
             validate.chosenFix(oInput, function(oChosenInput) {
                 validate.setStatus(oChosenInput, sStatus, sMessage);
@@ -172,7 +175,6 @@ validate = {
     },
             
     setIncomplete: function(oForm){
-        //console.log('setIncomplete');
         oForm.find(':input.vwarning').each(function(){
             $(this).removeClass('vwarning');
             $(this).addClass('vincomplete');
@@ -195,7 +197,6 @@ validate = {
     },
             
     clearInputStatus: function(oInput){
-        //console.log('clearinputstatus');
         oInput.removeClass('vsuccess');
         oInput.removeClass('vwarning');
         oInput.removeClass('vincomplete');
@@ -204,14 +205,12 @@ validate = {
     },
             
     clearFormStatus: function(oForm){
-        //console.log('clearformstatus');
         oForm.find(':input').each(function(){
             validate.clearInputStatus($(this));
         });
     },
             
     clearFormValues: function(oForm){
-        //console.log('clearformstatus');
         oForm.find(':input').each(function(){
             $(this).val('');
         });
@@ -219,10 +218,8 @@ validate = {
     },
             
     isFormSuccess: function(oForm){
-        //console.log('isformsuccess');
         var bSuccessful = true;
         oForm.find(':input').each(function(){
-            //console.log($(this).attr('id') + " - " + $(this).hasClass('vsuccess'));
             if(!empty($(this).attr('id')) && !$(this).hasClass('vsuccess')) bSuccessful = false;
         });
         return bSuccessful;
