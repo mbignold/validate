@@ -15,7 +15,7 @@
 * Basic setup using only [data-] properties in HTML tags.
 * Uses Bootstrap Tooltips for a streamlined & functional user interface.
 * Only one single .js file to add to your page, and .php file to add to your server.
-* Works with [bootstrap-chosen](https://github.com/alxlit/bootstrap-chosen) improved select boxes.
+* Works with input, select, textarea tags as well as with [bootstrap-chosen](https://github.com/alxlit/bootstrap-chosen) improved select boxes.
 
 ### Dependencies
 
