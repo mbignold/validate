@@ -2,7 +2,7 @@
 
 ### Simple & robust form validation for Bootstrap 3.0, jQuery 2.0.2, Ajax & PHP
 
-### See Examples at: http://ceres.bignold.com/validate
+### See Examples at: http://www.bignold.com/dev/validate/
 
 * MIT Licence
 * Copyright 2013 Michael Bignold
@@ -29,4 +29,4 @@
 
 ![Ajax jQuery Bootstrap Form Validation](http://www.bignold.com/dev/validate/demo3.png)
 See Examples at:
-http://dev.bignold.com/validate
+http://www.bignold.com/dev/validate/
